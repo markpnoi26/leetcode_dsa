@@ -11,6 +11,7 @@
  * @return {number}
  */
 const pathSum = (root, sum) => {
+    if (root === null) return 0
     const queue = []
     queue.push(root)
     let sumCount = 0
@@ -29,7 +30,6 @@ const pathSum = (root, sum) => {
 
 const countToSum = (node, currSum, sumTarget) => {
     let sumCount = 0
-    
     if (node === null) return sumCount
     let sumToLeaf = currSum+node.val
     if (sumToLeaf === sumTarget) {
@@ -39,7 +39,6 @@ const countToSum = (node, currSum, sumTarget) => {
 
     // returns the number of times currSum === sumTarget
     return sumCount
-    
 }
 
 
