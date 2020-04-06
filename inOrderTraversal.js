@@ -27,7 +27,7 @@ const inorderTraversal = root => {
 
 const inorderTraversalIterate = root => {
     // iterative solution
-    
+
     const output = []
     const stack = []
 
@@ -53,5 +53,5 @@ const root = {
        right: null } }
 
 
-// console.log(inorderTraversal(root))
+console.log(inorderTraversal(root), [1,3,2])
 console.log(inorderTraversalIterate(root), [1,3,2])
