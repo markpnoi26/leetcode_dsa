@@ -47,29 +47,58 @@ class TreeNode {
 // };
 
 // 
-const flatten = root => {
+// const flatten = root => {
+//     if (!root) return root
+
+//     const stack = [root]
+//     while(stack.length) {
+//         let popped = stack.pop()
+//         if (popped.right) {
+//             stack.push(popped.right)
+//         }
+//         if (popped.left) {
+//             stack.push(popped.left)
+//         }
+
+//         if (stack.length) {
+//             let top = stack[stack.length-1]
+//             popped.left = null
+//             popped.right = top
+//         }
+
+//     }
+
+//     return root
+// }
+
+const flatten = (root) => {
     if (!root) return root
+    let newRoot = null
+    let currNode = null
 
-    const stack = [root]
-    while(stack.length) {
-        let popped = stack.pop()
-        if (popped.right) {
-            stack.push(popped.right)
-        }
-        if (popped.left) {
-            stack.push(popped.left)
+    const recursion = (node) => {
+        if (!node) return
+
+        let newNode = new TreeNode(node.val)
+        if (currNode === null) {
+            currNode = newNode
+            newRoot = currNode
+        } else {
+            currNode.right = newNode
+            currNode = newNode
         }
 
-        if (stack.length) {
-            let top = stack[stack.length-1]
-            popped.left = null
-            popped.right = top
-        }
+        recursion(node.left)
+        recursion(node.right)
 
     }
 
+    recursion(root)
+
+    root.left = null
+    root.right = newRoot.right
     return root
-}
+};
 
 let root = {
     val: 1,
