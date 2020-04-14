@@ -73,30 +73,21 @@ class TreeNode {
 
 const flatten = (root) => {
     if (!root) return root
-    let newRoot = null
     let currNode = null
 
     const recursion = (node) => {
         if (!node) return
-
-        let newNode = new TreeNode(node.val)
-        if (currNode === null) {
-            currNode = newNode
-            newRoot = currNode
-        } else {
-            currNode.right = newNode
-            currNode = newNode
-        }
-
-        recursion(node.left)
+        
         recursion(node.right)
+        recursion(node.left)
 
+        node.left = null
+        node.right = currNode
+        currNode = node
     }
 
     recursion(root)
 
-    root.left = null
-    root.right = newRoot.right
     return root
 };
 
