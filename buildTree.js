@@ -26,7 +26,6 @@ const buildTree = (preorder, inorder) => {
     // we get both empty arrays and 1 length arrays through the recursion
 
     if (preorder.length === 0 && inorder.length === 0) return null
-    
     if (preorder.length === 1 && inorder.length === 1) return new TreeNode(preorder[0])
 
     let subRoot = new TreeNode(preorder[0])
