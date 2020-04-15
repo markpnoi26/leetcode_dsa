@@ -27,9 +27,7 @@ const buildTree = (preorder, inorder) => {
 
     if (preorder.length === 0 && inorder.length === 0) return null
     
-    if (preorder.length === 1 && inorder.length === 1) {
-        return new TreeNode(preorder[0])
-    }
+    if (preorder.length === 1 && inorder.length === 1) return new TreeNode(preorder[0])
 
     let subRoot = new TreeNode(preorder[0])
     let leftPre, leftIn, rightPre, rightIn, mid
