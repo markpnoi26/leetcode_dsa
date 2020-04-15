@@ -21,13 +21,14 @@ class TreeNode{
 
 const buildTree = (preorder, inorder) => {
     
+    // two base cases are needed, because 
+    // slicing array.length == 1 would not work properly via recursion.
+    // we get both empty arrays and 1 length arrays through the recursion
+
     if (preorder.length === 0 && inorder.length === 0) return null
     
     if (preorder.length === 1 && inorder.length === 1) {
-        let baseVal = new TreeNode(preorder[0])
-        baseVal.right = null
-        baseVal.left = null
-        return baseVal
+        return new TreeNode(preorder[0])
     }
 
     let subRoot = new TreeNode(preorder[0])
@@ -41,19 +42,11 @@ const buildTree = (preorder, inorder) => {
         }
     }
 
-
     leftPre = preorder.slice(1, mid+1)
     rightPre = preorder.slice(mid+1)
 
-    console.log(rightIn, leftIn)
-    console.log(leftPre, rightPre)
-
-    
-
     subRoot.left = buildTree(leftPre, leftIn)
     subRoot.right = buildTree(rightPre, rightIn)
-
-
 
     return subRoot
     
