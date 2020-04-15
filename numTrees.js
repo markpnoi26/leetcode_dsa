@@ -6,24 +6,20 @@
 
 const numTrees = n => {
     const dp = new Array(n+1).fill(0)
-    dp[0] = 0
+    dp[0] = 1
     dp[1] = 1
+    /**
+     * dp[0] was originally thought of as => 0 but setting it to 1
+     * made it possible to multiply the right side to the left side of the unique combinations
+     * of the BST. The logic made it easier and faster than the original thought of solution.
+     */
+
 
     for (let i = 2; i <= n; i++) {
-        let left = 0, right = i-1, product = 0
-
+        let left = 0, right = i-1
         for (let j = left; j < i; left++, right--, j++) {
-            if (left === 0) {
-                product+=dp[right]
-            } else if (right === 0) {
-                product+=dp[left]
-            } else {
-                product+=(dp[left]*dp[right])
-            }
+            dp[i]+=(dp[left]*dp[right])
         }
-
-        dp[i] = product
-        
     }
 
     return dp[n]
