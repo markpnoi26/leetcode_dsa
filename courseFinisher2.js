@@ -6,14 +6,16 @@
 const findOrder = (numCourses, prerequisites) => {
 
     const dependency = {}
-    const orderedDependency = {}
     const visited = {}
     const inProgress = {}
     const hasCycle = {}
-    const order = []
+    let order = []
 
     for (let i=0; i<numCourses; i++) {
         dependency[i] = []
+        visited[i] = false
+        inProgress[i] = false
+        hasCycle[i] = false
     }
 
     for (let clss of prerequisites) {
@@ -21,7 +23,7 @@ const findOrder = (numCourses, prerequisites) => {
     }
 
     for (let clss in dependency) {
-        dfs(clss, dependency[clss], order, dependency, visited, inProgress, hasCycle)
+        order = (dfs(clss, dependency[clss], dependency, visited, inProgress, hasCycle)).concat(order)
     }
 
     for (let clss in hasCycle) {
@@ -31,24 +33,26 @@ const findOrder = (numCourses, prerequisites) => {
     return order
 };
 
-const dfs = (clss, clsses, order, dependency, visited, inProgress, hasCycle) => {
-    if (visited[clss]) return
+const dfs = (clss, clsses, dependency, visited, inProgress, hasCycle) => {
+    let order = []
+    if (visited[clss]) return order
 
-    visited[clss] = true
     inProgress[clss] = true
 
     for (let clssItem of clsses) {
         if (inProgress[clssItem]) {
             hasCycle[clssItem] = true
-        }
+        } 
         if (visited[clssItem] === false && inProgress[clssItem] === false) {
-            dfs(clssItem, dependency[clssItem], order, dependency, visited, inProgress, hasCycle)
+            order = (dfs(clssItem, dependency[clssItem], dependency, visited, inProgress, hasCycle)).concat(order)
         }
     }
 
-    console.log(clss)
-    order.unshift(parseInt(clss, 10))
+    order = [parseInt(clss, 10)].concat(order)
+    visited[clss] = true
     inProgress[clss] = false
+    return order
+
 }
 
 
