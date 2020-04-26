@@ -24,9 +24,9 @@ const networkDelayTime = (times, N, K) => {
   
     const myHeap = new PriorityQueue();
   
-    visited[K] = true
+    visited[K] = true;
     minDistance[K] = 0;
-    nodeDistance[K] = 0
+    nodeDistance[K] = 0;
     myHeap.enqueue(K, 0);
   
     while (myHeap.values.length) {
@@ -136,23 +136,21 @@ class Node {
     }
 }
   
-  
-  // class PriorityQueue {
-  //   constructor() {
-  //     this.values = [];
-  //   }
-  //   enQ(node) {
-  //     this.values.push(node);
-  //     this.sort();
-  //   }
-  //   deQ() {
-  //     return this.values.shift();
-  //   }
-  //   sort() {
-  //     this.values.sort((a, b) => a.wt - b.wt);
-  //   }
-  // }
-  
+// class PriorityQueue {
+//   constructor() {
+//     this.values = [];
+//   }
+//   enQ(node) {
+//     this.values.push(node);
+//     this.sort();
+//   }
+//   deQ() {
+//     return this.values.shift();
+//   }
+//   sort() {
+//     this.values.sort((a, b) => a.wt - b.wt);
+//   }
+// }
   
 let times = [[2, 1, 1], [2, 3, 1], [3, 4, 1]],
 n = 4,
@@ -164,26 +162,11 @@ times = [[1,2,1],[2,1,3]], n=2, k=2
 console.log(networkDelayTime(times, n, k));
 
 times = [
-    [3,5,78],
-    [2,1,1],
-    [1,3,0],
-    [4,3,59],
-    [5,3,85],
-    [5,2,22],
-    [2,4,23],
-    [1,4,43],
-    [4,5,75],
-    [5,1,15],
-    [1,5,91],
-    [4,1,16],
-    [3,2,98],
-    [3,4,22],
-    [5,4,31],
-    [1,2,0],
-    [2,5,4],
-    [4,2,51],
-    [3,1,36],
-    [2,3,59]
+    [3,5,78],[2,1,1],[1,3,0],[4,3,59],
+    [5,3,85],[5,2,22],[2,4,23],[1,4,43],
+    [4,5,75],[5,1,15],[1,5,91],[4,1,16],
+    [3,2,98],[3,4,22],[5,4,31],[1,2,0],
+    [2,5,4],[4,2,51],[3,1,36],[2,3,59]
   ]
 n= 5
 k= 5
@@ -191,9 +174,7 @@ console.log(networkDelayTime(times, n, k));
 
 
 times = [
-    [1,2,1],
-    [2,3,2],
-    [1,3,2]
+    [1,2,1],[2,3,2],[1,3,2]
 ],
 n = 3,
 k = 1
