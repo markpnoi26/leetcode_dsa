@@ -8,48 +8,33 @@ const shortestAlternatingPaths = (n, red_edges, blue_edges) => {
     // all wt considered is 1
     // modified dijkstra's algorithm with alternating paths.
 
-    const adjacencyList = {}
+    const redAdjacencyList = {}
+    const blueAdjacencyList = {}
     const minDistances = {}
     const answer = new Array(n).fill(-1)
 
     for (let i=0; i<n; i++) {
-        adjacencyList[i] = []
-        minDistances[i] = Infinity
+        redAdjacencyList[i] = []
+        blueAdjacencyList[i] = []
+        minDistances[i] = {red: Infinity, blue: Infinity}
     }
 
     for (let node of red_edges) {
-        adjacencyList[node[0]].push({name: node[1], priority: 1, color: "red"})
+        redAdjacencyList[node[0]].push({name: node[1], priority: 1})
     }
 
     for (let node of blue_edges) {
-        adjacencyList[node[0]].push({name: node[1], priority: 1, color: "blue"})
+        blueAdjacencyList[node[0]].push({name: node[1], priority: 1})
     }
 
     let heap = new PriorityQueue()
 
     heap.enqueue({name: 0, priority: 0})
-    minDistances[0] = 0 
+    minDistances[0] = {red: 0, blue: 0}
 
-    while (heap.values.length > 0) {
-        const currNode = heap.dequeue()
-
-        for (let node of adjacencyList[currNode.name]) {
-            if (node.color !== currNode.color) {
-                
-                heap.enqueue(node)
-            }
-        }
-    }
-
-    for (let node in minDistances) {
-        if (minDistances[node] === Infinity) {
-            answer.push(-1)
-        } else {
-            answer.push(minDistances[node])
-        }
-    }
-
-    return answer
+   
+    console.log(redAdjacencyList)
+    console.log(blueAdjacencyList)
 };
 
 class PriorityQueue {
