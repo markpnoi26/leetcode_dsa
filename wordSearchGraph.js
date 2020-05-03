@@ -4,9 +4,6 @@
  * @return {boolean}
  */
 const exist = (board, word) => {
-    const charCount = board.length*board[0].length
-    if (charCount < word.length) return false
-    if (!board.length) return false
 
     for (let i = 0; i<board.length; i++) {
         for (let j = 0; j<board[i].length; j++) {
@@ -19,31 +16,20 @@ const exist = (board, word) => {
 };
 
 const dfs = (board, word, idx, i, j) => {
-    if (word[idx] !== board[i][j]) return false
-    if (idx === word.length-1 && word[idx] === board[i][j]) return true
+    if (word.length === idx) return true
+    if (i < 0 || j < 0 || j >= board[0].length || i >= board.length || board[i][j] !== word[idx]) return false
 
     board[i][j] = "*"
 
-    let up, down, right, left
-    if (i > 0 && board[i-1][j] !== "*") {
-        up  = dfs(board, word, idx+1, i-1, j)
-        if (up) return true
-    }
-    if (i < board.length-1 && board[i+1][j] !== "*") {
-        down = dfs(board, word, idx+1, i+1, j)
-        if (down) return true
-    }
-    if (j > 0 && board[i][j-1] !== "*" ) {
-        left = dfs(board, word, idx+1, i, j-1)
-        if (left) return true
-    } 
-    if (j < board[i].length-1 && board[i][j+1] !== "*") {
-        right = dfs(board, word, idx+1, i, j+1)
-        if (right) return true
-    }
+    let answer = (
+        dfs(board, word, idx+1, i+1, j) ||
+        dfs(board, word, idx+1, i-1, j) ||
+        dfs(board, word, idx+1, i, j-1) ||
+        dfs(board, word, idx+1, i, j+1)
+    )
     board[i][j] = word[idx]
 
-    return (up || down || right || left)
+    return answer
 }
 
 
