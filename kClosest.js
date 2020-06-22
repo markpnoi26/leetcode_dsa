@@ -100,14 +100,14 @@ class PriorityQueue {
             idx = swap;
         }
     }
-  }
+}
   
-  class Node {
+class Node {
     constructor(val, priority){
         this.val = val;
         this.priority = priority;
     }
-  }
+}
 
 
 let points = [[1,3],[-2,2]], k = 1
